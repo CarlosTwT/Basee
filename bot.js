@@ -3,7 +3,7 @@ require('./config.js')
 const fonts = require('./lib/font.js');
 const menufont = require('./lib/menufont.js');
 const uploadImage = require('./lib/uploadImage.js');
-const { gssrentbot, conns } = require('./RentBot.js')
+const { gssrentbot, conns } = require('./sharebot.js')
 const languages = require('./lib/language.js');
 const got = require('got');
 const more = String.fromCharCode(8206)
