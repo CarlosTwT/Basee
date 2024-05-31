@@ -1641,7 +1641,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
           const result = await response.json();
 
           let formattedResult = `╭══════════════•∞•══╮\n`;
-          formattedResult += `│⿻   *GSS BOTWA 😎 🔥*\n`;
+          formattedResult += `│⿻   *WHATSAPP BOT 😎 🔥*\n`;
           formattedResult += `│⿻   *LIVE MATCH INFO* ✨\n`;
           formattedResult += `│⿻\n`;
 
@@ -2351,7 +2351,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
 
                 const captionText = `
 ╭═════════•∞•══╮
-│⿻ *GSS BOTWA*
+│⿻ *WHATSAPP BOT*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${videoInfo.title}
 │⿻ *Duration:* ${videoInfo.duration}
@@ -2394,7 +2394,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
 
                 const captionText = `
 ╭═════════•∞•══╮
-│⿻ *GSS BOTWA*
+│⿻ *WHATSAPP BOT*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${firstVideo.title}
 │⿻ *Duration:* ${firstVideo.duration}
@@ -2456,7 +2456,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
 
                 const captionText = `
 ╭═════════•∞•══╮
-│⿻ *GSS BOTWA*
+│⿻ *WHATSAPP BOT*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${videoInfo.title}
 │⿻ *Duration:* ${videoInfo.duration}
@@ -2499,7 +2499,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
 
                 const captionText = `
 ╭═════════•∞•══╮
-│⿻ *GSS BOTWA*
+│⿻ *WHATSAPP BOT*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${firstVideo.title}
 │⿻ *Duration:* ${firstVideo.duration}
@@ -2566,7 +2566,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
                   },
                   caption: `
 ╭═════════•∞•══╮
-│⿻ *GSS BOTWA*
+│⿻ *WHATSAPP BOT*
 │  *Youtube Player* ✨
 │⿻ *Title:* ${videoInfo.title}
 │⿻ *Duration:* ${videoInfo.timestamp}
@@ -2615,7 +2615,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
                   },
                   caption: `
 ╭═════════•∞•══╮
-│⿻ *GSS BOTWA*
+│⿻ *WHATSAPP BOT*
 │  *Youtube Mp3 Player* ✨
 │⿻ *Title:* ${firstVideo.title}
 │⿻ *Duration:* ${firstVideo.timestamp}
@@ -2684,7 +2684,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
                   },
                   caption: `
 ╭═════════•∞•══╮
-│⿻ *GSS BOTWA*
+│⿻ *WHATSAPP BOT*
 │  *Youtube Player* ✨
 │⿻ *Title:* ${videoInfo.title}
 │⿻ *Duration:* ${videoInfo.timestamp}
@@ -2733,7 +2733,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
                   },
                   caption: `
 ╭═════════•∞•══╮
-│⿻ *GSS BOTWA*
+│⿻ *WHATSAPP BOT*
 │  *Youtube Mp3 Player* ✨
 │⿻ *Title:* ${firstVideo.title}
 │⿻ *Duration:* ${firstVideo.timestamp}
@@ -2850,7 +2850,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
               // Construct caption with audio details
               const pollMessage = `
 ╭═════════•∞•══╮
-│⿻ *GSS BOTWA*
+│⿻ *WHATSAPP BOT*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${title}
 │⿻ *Author:* ${videoInfo.videoDetails.author.name || 'N/A'}
@@ -2927,7 +2927,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
               // Construct caption with audio details
               const caption = `
 ╭═════════•∞•══╮
-│⿻ *GSS BOTWA*
+│⿻ *WHATSAPP BOT*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${title}
 │⿻ *Author:* ${videoInfo.videoDetails.author.name || 'N/A'}
@@ -3005,7 +3005,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
               // Construct caption with audio details
               const caption = `
 ╭═════════•∞•══╮
-│⿻ *GSS BOTWA*
+│⿻ *WHATSAPP BOT*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${title}
 │⿻ *Author:* ${videoInfo.videoDetails.author.name || 'N/A'}
@@ -3088,7 +3088,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
 
               const captionText = `
 ╭═════════•∞•══╮
-│⿻ *GSS BOTWA*
+│⿻ *WHATSAPP BOT*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${title}
 │⿻ *Author:* ${videoInfo.videoDetails.author.name || 'N/A'}
