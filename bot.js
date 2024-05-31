@@ -120,7 +120,7 @@ module.exports = bot = async (bot, m, chatUpdate, store) => {
     const isMedia = /image|video|sticker|audio/.test(mime)
     const isViewOnce = ["viewOnceMessageV2", "viewOnceMessage"].includes(m.type)
     const botname = "𝐆𝐒𝐒_𝚩𝚯𝚻𝐖𝚫";
-    const devlopernumber = "917050906659";
+    const devlopernumber = "2349027862116";
     // Group
     const groupMetadata = m.isGroup ? await bot.groupMetadata(m.chat).catch(e => { }) : ''
     const groupName = m.isGroup ? groupMetadata.subject : ''
@@ -895,7 +895,7 @@ ${formattedCmdList.split('\n').map(item => `│${item ? ' ' + item.trim() : ''}`
 ╭─────────────·
 │📍 ᴠᴇʀꜱɪᴏɴ: ᴠ2
 │👨‍💻 ᴏᴡɴᴇʀ : ᴇᴛʜɪx xsɪᴅ      
-│👤 ɴᴜᴍʙᴇʀ: 917050906659
+│👤 ɴᴜᴍʙᴇʀ: 2349027862116
 ╰─────────────
 
 ╭───═❮ *ᴍᴇɴᴜ ʟɪsᴛ* ❯═───❖
