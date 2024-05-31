@@ -66,7 +66,7 @@ const userWarnings = {};
 module.exports = bot = async (bot, m, chatUpdate, store) => {
   try {
     var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
-    var budy = (typeof m.text == 'string' ? m.text : '')
+    var cmd = (typeof m.text == 'string' ? m.text : '')
     const prefix = /^[\\/!#.]/gi.test(body) ? body.match(/^[\\/!#.]/gi) : "/";
     const isCmd = body.startsWith(prefix)
     const notCmd = body.startsWith('')
@@ -626,7 +626,7 @@ module.exports = bot = async (bot, m, chatUpdate, store) => {
 
     // Anti Link
     if (db.data.chats[m.chat].antilink) {
-      if (budy.match(`chat.whatsapp.com`)) {
+      if (cmd.match(`chat.whatsapp.com`)) {
         m.reply(`「 ANTI LINK 」\n\nYou were detected sending a group link, sorry, you will be kicked !`)
         if (!isBotAdmins) return m.reply(`Eh, the bot is not an admin `)
         let gclink = (`https://chat.whatsapp.com/` + await bot.groupInviteCode(m.chat))
@@ -6103,7 +6103,7 @@ ${cmdList.split('\n').map(item => `┃${item ? ' ' + item.trim() : ''}`).join('\
       default:
 
     }
-    if (budy.startsWith('=>')) {
+    if (cmd.startsWith('=>')) {
       if (!isCreator) return m.reply(mess.owner)
       function Return(sul) {
         sat = JSON.stringify(sul, null, 2)
@@ -6114,16 +6114,16 @@ ${cmdList.split('\n').map(item => `┃${item ? ' ' + item.trim() : ''}`).join('\
         return m.reply(bang)
       }
       try {
-        m.reply(util.format(eval(`(async () => { return ${budy.slice(3)} })()`)))
+        m.reply(util.format(eval(`(async () => { return ${cmd.slice(3)} })()`)))
       } catch (e) {
         m.reply(String(e))
       }
     }
 
-    if (budy.startsWith('>')) {
+    if (cmd.startsWith('>')) {
       if (!isCreator) return m.reply(mess.owner)
       try {
-        let evaled = await eval(budy.slice(2))
+        let evaled = await eval(cmd.slice(2))
         if (typeof evaled !== 'string') evaled = require('util').inspect(evaled)
         await m.reply(evaled)
       } catch (err) {
@@ -6131,9 +6131,9 @@ ${cmdList.split('\n').map(item => `┃${item ? ' ' + item.trim() : ''}`).join('\
       }
     }
 
-    if (budy.startsWith('$')) {
+    if (cmd.startsWith('$')) {
       if (!isCreator) return m.reply(mess.owner)
-      exec(budy.slice(2), (err, stdout) => {
+      exec(cmd.slice(2), (err, stdout) => {
         if (err) return m.reply(`${err}`)
         if (stdout) return m.reply(stdout)
       })
