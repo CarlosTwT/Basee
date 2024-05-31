@@ -3,13 +3,10 @@ require('./config.js')
 const fonts = require('./lib/font.js');
 const menufont = require('./lib/menufont.js');
 const uploadImage = require('./lib/uploadImage.js');
-const { gssrentbot, conns } = require('./sharebot.js')
-const languages = require('./lib/language.js');
-const got = require('got');
+const { botshare } = require('./sharebot.js')
 const more = String.fromCharCode(8206)
 const readmore = more.repeat(4001)
 const availableStyles = Object.keys(fonts);
-const availableFontStyles = Object.keys(menufont);
 const { proto, generateWAMessage, areJidsSameUser} = require('@whiskeysockets/baileys')
 const fs = require('fs')
 const fsx = require('fs-extra')
@@ -19,33 +16,19 @@ const util = require('util')
 const chalk = require('chalk')
 const { exec, spawn, execSync } = require("child_process")
 const axios = require('axios')
-const openai = require('openai');
-const path = require('path')
-const fg = require('api-dylux');
-const cheerio = require('cheerio');
 const os = require('os')
-const googleTTS = require('google-tts-api');
 const search = require('aptoide-scraper').search;
 const download = require('aptoide-scraper').download;
 const moment = require('moment-timezone')
-const { JSDOM } = require('jsdom')
-const { pipeline } = require('stream');
-const { promisify } = require('util');
-const streamPipeline = promisify(pipeline);
-const imageSize = require('image-size');
-const { PDFDocument, rgb } = require('pdf-lib');
-const speed = require('performance-now')
 const acrcloud = require('acrcloud');
-const { performance } = require('perf_hooks')
 const { Primbon } = require('scrape-primbon')
-const primbon = new Primbon()
 const osu = require("node-os-utils");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const translate = require('translate-google-api');
 const { cpus, totalmem, freemem } = require("os");
 const { sizeFormatter } = require("human-readable");
 const pingSt = new Date();
-const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, reSize, jsonformat, format, parseMention, getRandom, getGroupAdmins } = require('./lib/myfunc.js')
+const {  isUrl, sleep, clockString, fetchJson, getBuffer, jsonformat, parseMention, getRandom, getGroupAdmins } = require('./lib/myfunc.js')
 
 const acr = new acrcloud({
   host: 'identify-eu-west-1.acrcloud.com',
@@ -72,21 +55,11 @@ const mongoDBUrl = process.env.MONGO_DB || 'mongodb+srv://mohsin:mohsin@cluster0
 
 let akinator = global.db.data.game.akinator = []
 let currentPollIndex = 0;
-let ytsOptionIndex = 1;
-const ytsSearchResults = new Map();
-let props;
-const audioSearchResults = new Map();
 let optionIndex = 1;
-let index = 1;
 const reportedMessages = {};
 const videoSearchResults = new Map();
-let titleUrlMap = {};
-const userContextMap = new Map();
 let banUser = JSON.parse(fs.readFileSync('./database/banUser.json'));
 let banchat = JSON.parse(fs.readFileSync('./database/banChat.json'));
-let ban = JSON.parse(fs.readFileSync('./database/ban.json'))
-
-const warnUsers = [];
 let warnedUsers = [];
 const userWarnings = {};
 
@@ -119,11 +92,21 @@ module.exports = bot = async (bot, m, chatUpdate, store) => {
     const qmsg = (quoted.msg || quoted)
     const isMedia = /image|video|sticker|audio/.test(mime)
     const isViewOnce = ["viewOnceMessageV2", "viewOnceMessage"].includes(m.type)
-    const botname = "𝐆𝐒𝐒_𝚩𝚯𝚻𝐖𝚫";
+    const botname = "ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ";
     const devlopernumber = "2349027862116";
     // Group
     const groupMetadata = m.isGroup ? await bot.groupMetadata(m.chat).catch(e => { }) : ''
     const groupName = m.isGroup ? groupMetadata.subject : ''
+    const groupDesc = m.isGroup ? groupMetadata.desc : ''
+    const groupOwner = m.isGroup ? groupMetadata.owner : ''
+    const groupCreatedAt = m.isGroup ? groupMetadata.creation : 0
+    const groupPictureUrl = m.isGroup ? await bot.profilePictureUrl(m.from, 'image').catch(e => { }) : ''
+    const groupRevoke = m.isGroup ? groupMetadata.revoke : ''
+    const groupMembers = m.isGroup ? await bot.groupMembers(m.from) : []
+    const isGroupLeft = m.isGroup ? await bot.groupLeft(m.from) : false
+    const isGroupJoined = m.isGroup ? await bot.groupJoined(m.from) : true
+    const isGroupAnnouncementsOnly = m.isGroup ? await bot.groupAnnouncementsOnly(m.from) : false
+    const isGroupRestricted = m.isGroup ? await bot.groupRestricted(m.from) : false
     const participants = m.isGroup ? await groupMetadata.participants : ''
     const groupAdmins = m.isGroup ? await getGroupAdmins(participants) : ''
     const isBotAdmins = m.isGroup ? groupAdmins.includes(botNumber) : false
@@ -973,7 +956,7 @@ ${menuText.split('\n').map(item => `││▸ ${item.trim()}`).join('\n')}
       case 'rentbot': {
         if (isBan) return m.reply(mess.banned);
         if (isBanChat) return m.reply(mess.bangc);
-        gssrentbot(bot, m, m.from, args);
+        botshare(bot, m, m.from, args);
       }
         break;
 
