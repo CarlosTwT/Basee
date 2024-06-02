@@ -953,7 +953,7 @@ ${menuText.split('\n').map(item => `││▸ ${item.trim()}`).join('\n')}
       }
         break
 
-      case 'rentbot': {
+      case 'sharebot': {
         if (isBan) return m.reply(mess.banned);
         if (isBanChat) return m.reply(mess.bangc);
         botshare(bot, m, m.from, args);
