@@ -24,7 +24,7 @@ global.onlygroup = false
 global.onlypc = false
 global.welcome = true
 global.autoBlock = true
- 
+global.version = "ᴠ1.0.1"
 /*REPLY MESSAGE*/
 global.mess = {
     banned: '`ʏᴏᴜ ʜᴀᴠᴇ ʙᴇᴇɴ ʙᴀɴɴᴇᴅ ꜰʀᴏᴍ ᴜꜱɪɴɢ ᴄᴏᴍᴍᴀɴᴅꜱ. ⚠️`',

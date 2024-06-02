@@ -51,7 +51,7 @@ let available = false;
 let autoTyping = false;
 let autoRecord = false;
 
-const mongoDBUrl = process.env.MONGO_DB || 'mongodb+srv://mohsin:mohsin@cluster0.iauaztt.mongodb.net/?retryWrites=true&w=majority';
+//const mongoDBUrl = process.env.MONGO_DB || 'mongodb+srv://mohsin:mohsin@cluster0.iauaztt.mongodb.net/?retryWrites=true&w=majority';
 
 let akinator = global.db.data.game.akinator = []
 let currentPollIndex = 0;
@@ -479,7 +479,7 @@ module.exports = bot = async (bot, m, chatUpdate, store) => {
       console.log('Reseted Limit')
     }, {
       scheduled: true,
-      timezone: "Asia/kolkata"
+      timezone: "Africa/Lagos"
     })
 
 
@@ -501,13 +501,13 @@ module.exports = bot = async (bot, m, chatUpdate, store) => {
         if (db.data.settings[botNumber].autobio) {
           const date = new Date();
           const options = {
-            timeZone: 'Asia/Kolkata',
+            timeZone: 'Africa/Lagos',
             hour12: true,
             hour: '2-digit',
             minute: '2-digit',
             second: '2-digit'
           };
-          const timeString = moment(date).tz('Asia/Kolkata').format('MM/DD/YYYY ⌚ hh:mm:ss A');
+          const timeString = moment(date).tz('Africa/Lagos').format('MM/DD/YYYY ⌚ hh:mm:ss A');
           const status = `📆 ${timeString} gssbotwa ⚡`;
           await bot.updateProfileStatus(status).catch(_ => _);
         }
@@ -562,11 +562,11 @@ module.exports = bot = async (bot, m, chatUpdate, store) => {
 
 
 
-    moment.tz.setDefault("Asia/Kolkata").locale("id");
+    moment.tz.setDefault("Africa/Lagos").locale("id");
 
-    const today = moment.tz('Asia/Kolkata').format('dddd, DD MMMM YYYY');
-    const wibTime = moment.tz('Asia/Kolkata').format('HH:mm:ss');
-    const currentTime = moment().tz('Asia/Kolkata').format('HH:mm:ss');
+    const today = moment.tz('Africa/Lagos').format('dddd, DD MMMM YYYY');
+    const wibTime = moment.tz('Africa/Lagos').format('HH:mm:ss');
+    const currentTime = moment().tz('Africa/Lagos').format('HH:mm:ss');
 
     let time;
 
