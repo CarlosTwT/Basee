@@ -1641,7 +1641,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
           const result = await response.json();
 
           let formattedResult = `╭══════════════•∞•══╮\n`;
-          formattedResult += `│⿻   *WHATSAPP BOT 😎 🔥*\n`;
+          formattedResult += `│⿻   *ᴍᴜʟᴛɪʙᴏᴛ x 😎 🔥*\n`;
           formattedResult += `│⿻   *LIVE MATCH INFO* ✨\n`;
           formattedResult += `│⿻\n`;
 
@@ -1818,7 +1818,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
         if (isBan) return m.reply(mess.banned);
         if (isBanChat) return m.reply(mess.bangc);
         if (!isCreator) throw mess.owner;
-        if (!text) throw `This is a WhatsApp Bot named bot botwa`;
+        if (!text) throw `This is a ᴍᴜʟᴛɪʙᴏᴛ x named bot botwa`;
         let name = await bot.updateProfileStatus(text);
         m.reply(`Successfully changed bot bio status to ${name}`);
       }
@@ -2351,7 +2351,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
 
                 const captionText = `
 ╭═════════•∞•══╮
-│⿻ *WHATSAPP BOT*
+│⿻ *ᴍᴜʟᴛɪʙᴏᴛ x*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${videoInfo.title}
 │⿻ *Duration:* ${videoInfo.duration}
@@ -2394,7 +2394,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
 
                 const captionText = `
 ╭═════════•∞•══╮
-│⿻ *WHATSAPP BOT*
+│⿻ *ᴍᴜʟᴛɪʙᴏᴛ x*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${firstVideo.title}
 │⿻ *Duration:* ${firstVideo.duration}
@@ -2456,7 +2456,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
 
                 const captionText = `
 ╭═════════•∞•══╮
-│⿻ *WHATSAPP BOT*
+│⿻ *ᴍᴜʟᴛɪʙᴏᴛ x*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${videoInfo.title}
 │⿻ *Duration:* ${videoInfo.duration}
@@ -2499,7 +2499,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
 
                 const captionText = `
 ╭═════════•∞•══╮
-│⿻ *WHATSAPP BOT*
+│⿻ *ᴍᴜʟᴛɪʙᴏᴛ x*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${firstVideo.title}
 │⿻ *Duration:* ${firstVideo.duration}
@@ -2566,7 +2566,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
                   },
                   caption: `
 ╭═════════•∞•══╮
-│⿻ *WHATSAPP BOT*
+│⿻ *ᴍᴜʟᴛɪʙᴏᴛ x*
 │  *Youtube Player* ✨
 │⿻ *Title:* ${videoInfo.title}
 │⿻ *Duration:* ${videoInfo.timestamp}
@@ -2615,7 +2615,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
                   },
                   caption: `
 ╭═════════•∞•══╮
-│⿻ *WHATSAPP BOT*
+│⿻ *ᴍᴜʟᴛɪʙᴏᴛ x*
 │  *Youtube Mp3 Player* ✨
 │⿻ *Title:* ${firstVideo.title}
 │⿻ *Duration:* ${firstVideo.timestamp}
@@ -2684,7 +2684,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
                   },
                   caption: `
 ╭═════════•∞•══╮
-│⿻ *WHATSAPP BOT*
+│⿻ *ᴍᴜʟᴛɪʙᴏᴛ x*
 │  *Youtube Player* ✨
 │⿻ *Title:* ${videoInfo.title}
 │⿻ *Duration:* ${videoInfo.timestamp}
@@ -2733,7 +2733,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
                   },
                   caption: `
 ╭═════════•∞•══╮
-│⿻ *WHATSAPP BOT*
+│⿻ *ᴍᴜʟᴛɪʙᴏᴛ x*
 │  *Youtube Mp3 Player* ✨
 │⿻ *Title:* ${firstVideo.title}
 │⿻ *Duration:* ${firstVideo.timestamp}
@@ -2850,7 +2850,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
               // Construct caption with audio details
               const pollMessage = `
 ╭═════════•∞•══╮
-│⿻ *WHATSAPP BOT*
+│⿻ *ᴍᴜʟᴛɪʙᴏᴛ x*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${title}
 │⿻ *Author:* ${videoInfo.videoDetails.author.name || 'N/A'}
@@ -2927,7 +2927,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
               // Construct caption with audio details
               const caption = `
 ╭═════════•∞•══╮
-│⿻ *WHATSAPP BOT*
+│⿻ *ᴍᴜʟᴛɪʙᴏᴛ x*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${title}
 │⿻ *Author:* ${videoInfo.videoDetails.author.name || 'N/A'}
@@ -3005,7 +3005,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
               // Construct caption with audio details
               const caption = `
 ╭═════════•∞•══╮
-│⿻ *WHATSAPP BOT*
+│⿻ *ᴍᴜʟᴛɪʙᴏᴛ x*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${title}
 │⿻ *Author:* ${videoInfo.videoDetails.author.name || 'N/A'}
@@ -3088,7 +3088,7 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
 
               const captionText = `
 ╭═════════•∞•══╮
-│⿻ *WHATSAPP BOT*
+│⿻ *ᴍᴜʟᴛɪʙᴏᴛ x*
 │  *Youtube Mp4 Player* ✨
 │⿻ *Title:* ${title}
 │⿻ *Author:* ${videoInfo.videoDetails.author.name || 'N/A'}

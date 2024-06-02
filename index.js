@@ -393,7 +393,7 @@ async function startgss() {
             // Add your custom message when the connection is open
             console.log('Connected...', update);
             bot.sendMessage(bot.user.id, {
-                text: `*hi bro! 🫡*\n_WHATSAPP BOT v2 bot has successfully connected to the server_`
+                text: `*hi bro! 🫡*\n_ᴍᴜʟᴛɪʙᴏᴛ x v2 bot has successfully connected to the server_`
             });
         }
     });
