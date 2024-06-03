@@ -1,9 +1,51 @@
 {
-  "users": {},
-  "chats": {},
+  "users": {
+    "2348052944641@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": "",
+      "limit": "Infinity"
+    },
+    "22871535411@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": "",
+      "limit": 10
+    }
+  },
+  "chats": {
+    "2348052944641@s.whatsapp.net": {
+      "antiviewonce": true,
+      "antibot": true,
+      "mute": false,
+      "antilink": false,
+      "antidelete": true,
+      "archived": true
+    },
+    "120363303905757320@g.us": {
+      "antiviewonce": true,
+      "antibot": true,
+      "mute": false,
+      "antilink": false,
+      "antidelete": true
+    },
+    "120363293027001927@g.us": {
+      "antiviewonce": true,
+      "antibot": true,
+      "mute": false,
+      "antilink": false,
+      "antidelete": true
+    }
+  },
   "database": {},
-  "game": {},
-  "settings": {},
+  "game": {
+    "akinator": []
+  },
+  "settings": {
+    "2348052944641@s.whatsapp.net": {
+      "anticall": false,
+      "status": 0,
+      "autobio": false
+    }
+  },
   "others": {},
   "sticker": {},
   "anonymous": {}

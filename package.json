@@ -1,22 +1,20 @@
 {
-  "name": "wa-bot",
-  "version": "1.0.0",
+  "name": "gss botwa",
+  "version": "1.2.5",
   "description": "WhatsApp Using Lib Baileys Multi Device",
   "main": "index.js",
   "type": "commonjs",
-    "scripts": {
-      "run": "pm2 start . --deep-monitoring --attach --name wa-bot || node .",
-      "wa-bot": "pm2 start . --deep-monitoring --attach --name wa-bot || node .",
-      "start": "pm2 start . --attach --name wa-bot",
-      "stop": "pm2 stop wa-bot",
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
+  "scripts": {
+    "run": "pm2 start . --deep-monitoring --attach --name mutibotto || node .",
+    "test": "pm2 start . --deep-monitoring --attach --name mutibotto || node .",
+    "start": "pm2 start . --attach --name mutibotto",
+    "restart": "pm2 start . --attach --name mutibotto",
+    "stop": "pm2 stop mutibotto"
+  },
   "keywords": [
-    "termux",
-    "whatsapp",
-    "multi-device"
+    "WhatsApp Bot"
   ],
-  "author": "FX",
+  "author": "sid bhai.",
   "license": "MIT",
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.4",
@@ -24,7 +22,7 @@
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@google/generative-ai": "^0.1.3",
     "@hapi/boom": "^10.0.1",
-    "@whiskeysockets/baileys": "^6.6.0",
+    "@whiskeysockets/baileys": "^6.7.4",
     "acrcloud": "^1.4.0",
     "api-dylux": "^1.6.5",
     "aptoide-scraper": "^1.0.1",
@@ -61,7 +59,6 @@
     "miniget": "^4.2.2",
     "moment-timezone": "^0.5.34",
     "mongoose": "^6.12.3",
-    "mrnima-fbdl": "^1.0.0",
     "mumaker": "^1.0.0",
     "node-cron": "^3.0.0",
     "node-fetch": "^2.6.1",
@@ -87,6 +84,7 @@
     "rimraf": "^3.0.2",
     "scrape-primbon": "^1.1.0",
     "simple-git": "^3.16.1",
+    "sqlite3": "^5.1.7",
     "stream": "^0.0.2",
     "syntax-error": "*",
     "translate-google-api": "^1.0.4",
@@ -106,10 +104,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AstroLegends/wabot.git"
+    "url": "git+https://github.com/gssbotwa/Gss_Botwa2.git"
   },
   "bugs": {
-    "url": "https://github.com/AstroLegends/wabot/issues"
+    "url": "https://github.com/gssbotwa/Gss_Botwa2/issues"
   },
-  "homepage": "https://github.com/AstroLegends/wabot#readme"
+  "homepage": "https://github.com/gssbotwa/Gss_Botwa2#readme"
 }

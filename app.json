@@ -1,7 +1,7 @@
 { 
-  "name": "whatsapp-bot (ᴍᴜʟᴛɪʙᴏᴛ x V2.0)",
-  "description": "ᴍᴜʟᴛɪʙᴏᴛ x.",
-  "keywords": ["ᴍᴜʟᴛɪʙᴏᴛ x"],
+  "name": "whatsapp-bot (GSS BOTWA V2.0)",
+  "description": "Whatsapp bot.",
+  "keywords": ["whatsapp bot"],
   "repository": "https://github.com/gssbotwa/Gssbotwa2",
   "stack": "container",
   "env": {
