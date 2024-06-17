@@ -44,6 +44,11 @@
       "afkTime": -1,
       "afkReason": "",
       "limit": 10
+    },
+    "2349013629692@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": "",
+      "limit": 10
     }
   },
   "chats": {
@@ -83,6 +88,13 @@
       "antidelete": true
     },
     "2348102487241@s.whatsapp.net": {
+      "antiviewonce": true,
+      "antibot": true,
+      "mute": false,
+      "antilink": false,
+      "antidelete": true
+    },
+    "2349013629692@s.whatsapp.net": {
       "antiviewonce": true,
       "antibot": true,
       "mute": false,
