@@ -73,6 +73,7 @@
   "pdf-lib": "^1.17.1",
   "perf_hooks": "0.0.1",
   "pino": "^7.0.5",
+  "pm2": "^5.4.0",
   "qrcode": "^1.5.3",
   "qrcode-reader": "^1.0.4",
   "qrcode-terminal": "^0.12.0",
@@ -90,9 +91,9 @@
   "xmlbuilder": "^15.1.1",
   "yargs": "^17.2.1",
   "youtube-yts": "^2.0.0",
+  "youtubedl-core": "^4.11.4",
   "yt-search": "^2.10.4",
   "ytdl-core": "^4.11.5",
-  "youtubedl-core": "^4.11.4",
   "ytsr": "^3.8.4"
  },
  "directories": {
