@@ -100,6 +100,20 @@
       "mute": false,
       "antilink": false,
       "antidelete": true
+    },
+    "2349027862116:72@s.whatsapp.net": {
+      "antiviewonce": true,
+      "antibot": true,
+      "mute": false,
+      "antilink": false,
+      "antidelete": true
+    },
+    "22899869601@s.whatsapp.net": {
+      "antiviewonce": true,
+      "antibot": true,
+      "mute": false,
+      "antilink": false,
+      "antidelete": true
     }
   },
   "database": {},

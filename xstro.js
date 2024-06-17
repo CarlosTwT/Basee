@@ -28,7 +28,7 @@ const { cpus, freemem } = require("os");
 const { sizeFormatter } = require("human-readable");
 const pingSt = new Date();
 const { isUrl, sleep, clockString, fetchJson, getBuffer, jsonformat, parseMention, getRandom, getGroupAdmins } = require("./lib/myfunc");
-
+const { countStrings } = require('./menus.js');
 const acr = new acrcloud({
  host: "identify-eu-west-1.acrcloud.com",
  access_key: "c33c767d683f78bd17d4bd4991955d81",
@@ -941,7 +941,6 @@ ${menuText
     }
    }
   }
-
   switch (command) {
    case "afk":
     {
@@ -6125,6 +6124,7 @@ Waiting @${room.game.currentTurn.split("@")[0]} Type *surrender* to give up and 
     if (isBanChat) return m.reply(mess.bangc);
     await doReact("◽");
     let a = db.data.users[m.sender];
+    let commandCounts = countStrings(); // Call the function to get the counts
     let introText = `
 ╭═══〘 *${botname || "xꜱᴛʀᴏ ʟɪᴛᴇ"}* 〙═⊷❍
 ┃❃╭──────────────
@@ -6134,6 +6134,7 @@ Waiting @${room.game.currentTurn.split("@")[0]} Type *surrender* to give up and 
 ┃❃│ *ᴜsᴇʀs:* ${Object.keys(global.db.data.users).length} ᴜsᴇʀs
 ┃❃│ *ᴄʜᴀᴛs:* ${Object.keys(global.db.data.chats).length} ᴄʜᴀᴛs
 ┃❃│ *ᴘʀᴇᴍɪᴜᴍ:* ${isPremium ? "ʏᴇs" : "ɴᴏ"} 
+┃❃│ *ᴄᴏᴍᴍᴀɴᴅs:* ${commandCounts.totalCount}
 ┃❃╰───────────────
 ╰═════════════════⊷
 ${readmore}
