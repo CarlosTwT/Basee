@@ -1,48 +1,4 @@
 require("./config");
-const config = require("./config.js");
-// Array to store all the commands
-const commands = [];
-
-/**
- * Function to create a new command
- *
- * @param {Object} commandObj - The command object
- * @param {Function} handler - The function handler for the command
- * @returns {Object} The created command object
- */
-function Index(commandObj, handler) {
-  const command = commandObj;
-  command.function = handler;
-
-  // Set the pattern if cmdname is provided
-  if (!command.pattern && commandObj.cmdname) {
-    command.pattern = commandObj.cmdname;
-  }
-
-  // Initialize properties if not already set
-  command.alias = command.alias || [];
-  command.dontAddCommandList = command.dontAddCommandList || false;
-  command.desc = command.desc || commandObj.info || "";
-  command.fromMe = command.fromMe || false;
-  command.isAdminCommand = command.isAdminCommand || false,
-  command.category = command.category || commandObj.type || "misc";
-
-  // Set additional properties
-  command.info = command.desc;
-  command.type = command.category;
-  command.use = command.use || "";
-  command.filename = command.filename || "Not Provided";
-
-  // Add the command to the commands array
-  commands.push(command);
-
-  return command;
-}
-// Exports For Plugins
-module.exports = {
-  Index,
-  commands,
-};
 const {
  default: gssConnect,
  useMultiFileAuthState,
@@ -72,7 +28,7 @@ const moment = require("moment-timezone");
 const axios = require("axios");
 const PhoneNumber = require("awesome-phonenumber");
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require("./lib/exif");
-const { smsg, getBuffer, getSizeMedia} = require("./lib/myfunc");
+const { smsg, getBuffer, getSizeMedia } = require("./lib/myfunc");
 const fetch = require("node-fetch");
 
 const app = express();
@@ -138,7 +94,7 @@ if (global.db)
   if (global.db.data) await global.db.write();
  }, 30 * 1000);
 
-async function startgss() {
+async function StartBot() {
  if (!process.env.SESSION_ID) {
   useQR = true;
   isSessionPutted = false;
@@ -149,15 +105,15 @@ async function startgss() {
 
  let { state, saveCreds } = await useMultiFileAuthState(sessionName);
  let { version, isLatest } = await fetchLatestBaileysVersion();
- console.log(chalk.red("STARTING BOTTO"));
+ console.log(chalk.red("BOT STARTED"));
  console.log(chalk.green(`using WA v${version.join(".")}, isLatest: ${isLatest}`));
 
  const Device = os.platform() === "win32" ? "Windows" : os.platform() === "darwin" ? "MacOS" : "Linux";
- const gss = gssConnect({
+ const Xstro = gssConnect({
   version,
   logger: pino({ level: "silent" }),
   printQRInTerminal: useQR,
-  browser: [Device, "chrome", "121.0.6167.159"],
+  browser: [Device, "Windows"],
   patchMessageBeforeSending: message => {
    const requiresPatch = !!(message.buttonsMessage || message.templateMessage || message.listMessage);
    if (requiresPatch) {
@@ -193,53 +149,46 @@ async function startgss() {
   defaultQueryTimeoutMs: undefined,
   msgRetryCounterCache,
  });
- store?.bind(gss.ev);
+ store?.bind(Xstro.ev);
 
  // Manage Device Loging
- if (!gss.authState.creds.registered && isSessionPutted) {
-  const sessionID = process.env.SESSION_ID.split("BOT&")[1];
+ if (!Xstro.authState.creds.registered && isSessionPutted) {
+  const sessionID = process.env.SESSION_ID.split("SESSION&")[1];
   const pasteUrl = `https://pastebin.com/raw/${sessionID}`;
   const response = await fetch(pasteUrl);
   const text = await response.text();
   if (typeof text === "string") {
-   fs.writeFileSync("./session/creds.json", text);
+   fs.writeFileSync("./auth/creds.json", text);
    console.log("session file created");
-   await startgss();
+   await StartBot();
   }
  }
- store.bind(gss.ev);
+ store.bind(Xstro.ev);
 
- gss.ev.on("messages.upsert", async m => {
-  const msg = m.messages[0];
-  if (!msg.key.fromMe && msg.message?.conversation) {
-   console.log(`Received message: ${msg.message.conversation}`);
-  }
- });
-
- gss.ev.on("messages.upsert", async chatUpdate => {
+ Xstro.ev.on("messages.upsert", async chatUpdate => {
   try {
    mek = chatUpdate.messages[0];
    if (!mek.message) return;
    mek.message = Object.keys(mek.message)[0] === "ephemeralMessage" ? mek.message.ephemeralMessage.message : mek.message;
    if (mek.key && mek.key.remoteJid === "status@broadcast") return;
-   if (!gss.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
+   if (!Xstro.public && !mek.key.fromMe && chatUpdate.type === "notify") return;
    if (mek.key.id.startsWith("BAE5") && mek.key.id.length === 16) return;
    if (mek.key.id.startsWith("FatihArridho_")) return;
-   m = smsg(gss, mek, store);
-   require("./cmds")(gss, m, chatUpdate, store);
+   m = smsg(Xstro, mek, store);
+   require("./xstro")(Xstro, m, chatUpdate, store);
   } catch (err) {
    console.log(err);
   }
  });
 
- gss.ev.on("messages.upsert", async chatUpdate => {
+ Xstro.ev.on("messages.upsert", async chatUpdate => {
   try {
    if (global.autoreact) {
     const mek = chatUpdate.messages[0];
     console.log(mek);
     if (mek.message && !mek.key.fromMe) {
      const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-     await doReact(randomEmoji, mek, gss);
+     await doReact(randomEmoji, mek, Xstro);
     }
    }
   } catch (err) {
@@ -248,11 +197,11 @@ async function startgss() {
  });
 
  //autostatus view
- gss.ev.on("messages.upsert", async chatUpdate => {
+ Xstro.ev.on("messages.upsert", async chatUpdate => {
   if (global.antiswview) {
    mek = chatUpdate.messages[0];
    if (mek.key && mek.key.remoteJid === "status@broadcast") {
-    await gss.readMessages([mek.key]);
+    await Xstro.readMessages([mek.key]);
    }
   }
  });
@@ -268,7 +217,7 @@ async function startgss() {
   };
  }
 
- gss.ev.on("messages.update", async chatUpdate => {
+ Xstro.ev.on("messages.update", async chatUpdate => {
   for (const { key, update } of chatUpdate) {
    if (update.pollUpdates && key.fromMe) {
     const pollCreation = await getMessage(key);
@@ -282,29 +231,29 @@ async function startgss() {
 
      try {
       setTimeout(async () => {
-       await gss.sendMessage(key.remoteJid, { delete: key });
+       await Xstro.sendMessage(key.remoteJid, { delete: key });
       }, 10000);
      } catch (error) {
       console.error("Error deleting message:", error);
      }
 
-     gss.appenTextMessage(tocommand, chatUpdate);
+     Xstro.appenTextMessage(tocommand, chatUpdate);
     }
    }
   }
  });
 
  /*WELCOME LEFT*/
- gss.ev.on("group-participants.update", async anu => {
+ Xstro.ev.on("group-participants.update", async anu => {
   if (global.welcome) {
    console.log(anu);
    try {
-    let metadata = await gss.groupMetadata(anu.id);
+    let metadata = await Xstro.groupMetadata(anu.id);
     let participants = anu.participants;
 
     for (let num of participants) {
      try {
-      ppuser = await gss.profilePictureUrl(num, "image");
+      ppuser = await Xstro.profilePictureUrl(num, "image");
      } catch (err) {
       ppuser = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60";
      }
@@ -318,11 +267,11 @@ async function startgss() {
 
       const welcomeMessage = `> Hello @${userName}! Welcome to *${metadata.subject}*.\n> You are the ${membersCount}th member.\n> Joined at: ${joinTime} on ${joinDate}`;
 
-      gss.sendMessage(anu.id, {
+      Xstro.sendMessage(anu.id, {
        text: welcomeMessage,
        contextInfo: {
         externalAdReply: {
-         showAdAttribution: false,
+         showAdAttribution: true,
          title: userName,
          sourceUrl: ppuser,
          body: `${metadata.subject}`,
@@ -339,11 +288,11 @@ async function startgss() {
 
       const leftMessage = `> Goodbye @${userName} from ${metadata.subject}.\n> We are now ${membersCount} in the group.\n> Left at: ${leaveTime} on ${leaveDate}`;
 
-      gss.sendMessage(anu.id, {
+      Xstro.sendMessage(anu.id, {
        text: leftMessage,
        contextInfo: {
         externalAdReply: {
-         showAdAttribution: false,
+         showAdAttribution: true,
          title: userName,
          sourceUrl: ppuser,
          body: `${metadata.subject}`,
@@ -359,7 +308,7 @@ async function startgss() {
  });
 
  // Setting
- gss.decodeJid = jid => {
+ Xstro.decodeJid = jid => {
   if (!jid) return jid;
   if (/:\d+@/gi.test(jid)) {
    let decode = jidDecode(jid) || {};
@@ -367,21 +316,21 @@ async function startgss() {
   } else return jid;
  };
 
- gss.ev.on("contacts.update", update => {
+ Xstro.ev.on("contacts.update", update => {
   for (let contact of update) {
-   let id = gss.decodeJid(contact.id);
+   let id = Xstro.decodeJid(contact.id);
    if (store && store.contacts) store.contacts[id] = { id, name: contact.notify };
   }
  });
 
- gss.getName = (jid, withoutContact = false) => {
-  id = gss.decodeJid(jid);
-  withoutContact = gss.withoutContact || withoutContact;
+ Xstro.getName = (jid, withoutContact = false) => {
+  id = Xstro.decodeJid(jid);
+  withoutContact = Xstro.withoutContact || withoutContact;
   let v;
   if (id.endsWith("@g.us"))
    return new Promise(async resolve => {
     v = store.contacts[id] || {};
-    if (!(v.name || v.subject)) v = gss.groupMetadata(id) || {};
+    if (!(v.name || v.subject)) v = Xstro.groupMetadata(id) || {};
     resolve(v.name || v.subject || PhoneNumber("+" + id.replace("@s.whatsapp.net", "")).getNumber("international"));
    });
   else
@@ -391,28 +340,28 @@ async function startgss() {
         id,
         name: "WhatsApp",
        }
-     : id === gss.decodeJid(gss.user.id)
-     ? gss.user
+     : id === Xstro.decodeJid(Xstro.user.id)
+     ? Xstro.user
      : store.contacts[id] || {};
   return (withoutContact ? "" : v.name) || v.subject || v.verifiedName || PhoneNumber("+" + jid.replace("@s.whatsapp.net", "")).getNumber("international");
  };
 
- gss.sendContact = async (jid, kon, quoted = "", opts = {}) => {
+ Xstro.sendContact = async (jid, kon, quoted = "", opts = {}) => {
   let list = [];
   for (let i of kon) {
    list.push({
-    displayName: await gss.getName(i + "@s.whatsapp.net"),
-    vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await gss.getName(i + "@s.whatsapp.net")}\nFN:${await gss.getName(i + "@s.whatsapp.net")}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Phone\nEND:VCARD`,
+    displayName: await Xstro.getName(i + "@s.whatsapp.net"),
+    vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await Xstro.getName(i + "@s.whatsapp.net")}\nFN:${await Xstro.getName(i + "@s.whatsapp.net")}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Phone\nEND:VCARD`,
    });
   }
-  gss.sendMessage(jid, { contacts: { displayName: `${list.length} Kontak`, contacts: list }, ...opts }, { quoted });
+  Xstro.sendMessage(jid, { contacts: { displayName: `${list.length} Kontak`, contacts: list }, ...opts }, { quoted });
  };
 
- gss.public = true;
+ Xstro.public = true;
 
- gss.serializeM = m => smsg(gss, m, store);
+ Xstro.serializeM = m => smsg(Xstro, m, store);
 
- gss.ev.on("connection.update", async update => {
+ Xstro.ev.on("connection.update", async update => {
   const { connection, lastDisconnect } = update;
 
   if (connection === "close") {
@@ -420,41 +369,41 @@ async function startgss() {
 
    if (reason === DisconnectReason.badSession) {
     console.log(`Bad Session File, Please Delete Session and Scan Again`);
-    gss.logout();
+    Xstro.logout();
    } else if (reason === DisconnectReason.connectionClosed) {
     console.log("Connection closed, reconnecting....");
-    startgss();
+    StartBot();
    } else if (reason === DisconnectReason.connectionLost) {
     console.log("Connection Lost from Server, reconnecting...");
-    startgss();
+    StartBot();
    } else if (reason === DisconnectReason.connectionReplaced) {
     console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First");
-    gss.logout();
+    Xstro.logout();
    } else if (reason === DisconnectReason.loggedOut) {
     console.log(`Device Logged Out, Please Scan Again And Run.`);
-    gss.logout();
+    Xstro.logout();
    } else if (reason === DisconnectReason.restartRequired) {
     console.log("Restart Required, Restarting...");
-    startgss();
+    StartBot();
    } else if (reason === DisconnectReason.timedOut) {
     console.log("Connection TimedOut, Reconnecting...");
-    startgss();
+    StartBot();
    } else if (reason === DisconnectReason.Multidevicemismatch) {
     console.log("Multi device mismatch, please scan again");
-    gss.logout();
+    Xstro.logout();
    } else {
-    gss.end(`Unknown DisconnectReason: ${reason}|${connection}`);
+    Xstro.end(`Unknown DisconnectReason: ${reason}|${connection}`);
    }
   } else if (connection === "open") {
    // Add your custom message when the connection is open
    console.log("Connected...", update);
-   gss.sendMessage(gss.user.id, {
-    text: "```BOT IS RUNNING```\n```MADE BY ASTRO```",
+   Xstro.sendMessage(Xstro.user.id, {
+    text: "```*Xstro Lite Bot Is Running...```",
    });
   }
  });
 
- gss.ev.on("creds.update", saveCreds);
+ Xstro.ev.on("creds.update", saveCreds);
 
  // Add Other
 
@@ -465,8 +414,8 @@ async function startgss() {
   * @param {*} values
   * @returns
   */
- gss.sendPoll = (jid, name = "", values = [], selectableCount = 1) => {
-  return gss.sendMessage(jid, { poll: { name, values, selectableCount } });
+ Xstro.sendPoll = (jid, name = "", values = [], selectableCount = 1) => {
+  return Xstro.sendMessage(jid, { poll: { name, values, selectableCount } });
  };
 
  /**
@@ -477,25 +426,25 @@ async function startgss() {
   * @param {*} quoted
   * @param {*} options
   */
- gss.sendFileUrl = async (jid, url, caption, quoted, options = {}) => {
+ Xstro.sendFileUrl = async (jid, url, caption, quoted, options = {}) => {
   let mime = "";
   let res = await axios.head(url);
   mime = res.headers["content-type"];
   if (mime.split("/")[1] === "gif") {
-   return gss.sendMessage(jid, { video: await getBuffer(url), caption: caption, gifPlayback: true, ...options }, { quoted: quoted, ...options });
+   return Xstro.sendMessage(jid, { video: await getBuffer(url), caption: caption, gifPlayback: true, ...options }, { quoted: quoted, ...options });
   }
   let type = mime.split("/")[0] + "Message";
   if (mime === "application/pdf") {
-   return gss.sendMessage(jid, { document: await getBuffer(url), mimetype: "application/pdf", caption: caption, ...options }, { quoted: quoted, ...options });
+   return Xstro.sendMessage(jid, { document: await getBuffer(url), mimetype: "application/pdf", caption: caption, ...options }, { quoted: quoted, ...options });
   }
   if (mime.split("/")[0] === "image") {
-   return gss.sendMessage(jid, { image: await getBuffer(url), caption: caption, ...options }, { quoted: quoted, ...options });
+   return Xstro.sendMessage(jid, { image: await getBuffer(url), caption: caption, ...options }, { quoted: quoted, ...options });
   }
   if (mime.split("/")[0] === "video") {
-   return gss.sendMessage(jid, { video: await getBuffer(url), caption: caption, mimetype: "video/mp4", ...options }, { quoted: quoted, ...options });
+   return Xstro.sendMessage(jid, { video: await getBuffer(url), caption: caption, mimetype: "video/mp4", ...options }, { quoted: quoted, ...options });
   }
   if (mime.split("/")[0] === "audio") {
-   return gss.sendMessage(jid, { audio: await getBuffer(url), caption: caption, mimetype: "audio/mpeg", ...options }, { quoted: quoted, ...options });
+   return Xstro.sendMessage(jid, { audio: await getBuffer(url), caption: caption, mimetype: "audio/mpeg", ...options }, { quoted: quoted, ...options });
   }
  };
 
@@ -507,7 +456,7 @@ async function startgss() {
   * @param {*} options
   * @returns
   */
- gss.sendText = (jid, text, quoted = "", options) => gss.sendMessage(jid, { text: text, ...options }, { quoted, ...options });
+ Xstro.sendText = (jid, text, quoted = "", options) => Xstro.sendMessage(jid, { text: text, ...options }, { quoted, ...options });
 
  /**
   *
@@ -518,7 +467,7 @@ async function startgss() {
   * @param {*} options
   * @returns
   */
- gss.sendImage = async (jid, path, caption = "", quoted = "", options) => {
+ Xstro.sendImage = async (jid, path, caption = "", quoted = "", options) => {
   let buffer = Buffer.isBuffer(path)
    ? path
    : /^data:.*?\/.*?;base64,/i.test(path)
@@ -528,7 +477,7 @@ async function startgss() {
    : fs.existsSync(path)
    ? fs.readFileSync(path)
    : Buffer.alloc(0);
-  return await gss.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted });
+  return await Xstro.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted });
  };
 
  /**
@@ -540,7 +489,7 @@ async function startgss() {
   * @param {*} options
   * @returns
   */
- gss.sendVideo = async (jid, path, caption = "", quoted = "", gif = false, options) => {
+ Xstro.sendVideo = async (jid, path, caption = "", quoted = "", gif = false, options) => {
   let buffer = Buffer.isBuffer(path)
    ? path
    : /^data:.*?\/.*?;base64,/i.test(path)
@@ -550,7 +499,7 @@ async function startgss() {
    : fs.existsSync(path)
    ? fs.readFileSync(path)
    : Buffer.alloc(0);
-  return await gss.sendMessage(jid, { video: buffer, caption: caption, gifPlayback: gif, ...options }, { quoted });
+  return await Xstro.sendMessage(jid, { video: buffer, caption: caption, gifPlayback: gif, ...options }, { quoted });
  };
 
  /**
@@ -562,7 +511,7 @@ async function startgss() {
   * @param {*} options
   * @returns
   */
- gss.sendAudio = async (jid, path, quoted = "", ptt = false, options) => {
+ Xstro.sendAudio = async (jid, path, quoted = "", ptt = false, options) => {
   let buffer = Buffer.isBuffer(path)
    ? path
    : /^data:.*?\/.*?;base64,/i.test(path)
@@ -572,7 +521,7 @@ async function startgss() {
    : fs.existsSync(path)
    ? fs.readFileSync(path)
    : Buffer.alloc(0);
-  return await gss.sendMessage(jid, { audio: buffer, ptt: ptt, ...options }, { quoted });
+  return await Xstro.sendMessage(jid, { audio: buffer, ptt: ptt, ...options }, { quoted });
  };
 
  /**
@@ -583,8 +532,8 @@ async function startgss() {
   * @param {*} options
   * @returns
   */
- gss.sendTextWithMentions = async (jid, text, quoted, options = {}) =>
-  gss.sendMessage(jid, { text: text, mentions: [...text.matchAll(/@(\d{0,16})/g)].map(v => v[1] + "@s.whatsapp.net"), ...options }, { quoted });
+ Xstro.sendTextWithMentions = async (jid, text, quoted, options = {}) =>
+  Xstro.sendMessage(jid, { text: text, mentions: [...text.matchAll(/@(\d{0,16})/g)].map(v => v[1] + "@s.whatsapp.net"), ...options }, { quoted });
 
  /**
   *
@@ -594,7 +543,7 @@ async function startgss() {
   * @param {*} options
   * @returns
   */
- gss.sendImageAsSticker = async (jid, path, quoted, options = {}) => {
+ Xstro.sendImageAsSticker = async (jid, path, quoted, options = {}) => {
   let buff = Buffer.isBuffer(path)
    ? path
    : /^data:.*?\/.*?;base64,/i.test(path)
@@ -611,7 +560,7 @@ async function startgss() {
    buffer = await imageToWebp(buff);
   }
 
-  await gss.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted });
+  await Xstro.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted });
   return buffer;
  };
 
@@ -623,7 +572,7 @@ async function startgss() {
   * @param {*} options
   * @returns
   */
- gss.sendVideoAsSticker = async (jid, path, quoted, options = {}) => {
+ Xstro.sendVideoAsSticker = async (jid, path, quoted, options = {}) => {
   let buff = Buffer.isBuffer(path)
    ? path
    : /^data:.*?\/.*?;base64,/i.test(path)
@@ -640,7 +589,7 @@ async function startgss() {
    buffer = await videoToWebp(buff);
   }
 
-  await gss.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted });
+  await Xstro.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted });
   return buffer;
  };
 
@@ -651,7 +600,7 @@ async function startgss() {
   * @param {*} attachExtension
   * @returns
   */
- gss.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
+ Xstro.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
   let quoted = message.msg ? message.msg : message;
   let mime = (message.msg || message).mimetype || "";
   let messageType = message.mtype ? message.mtype.replace(/Message/gi, "") : mime.split("/")[0];
@@ -667,7 +616,7 @@ async function startgss() {
   return trueFileName;
  };
 
- gss.downloadMediaMessage = async message => {
+ Xstro.downloadMediaMessage = async message => {
   let mime = (message.msg || message).mimetype || "";
   let messageType = message.mtype ? message.mtype.replace(/Message/gi, "") : mime.split("/")[0];
   const stream = await downloadContentFromMessage(message, messageType);
@@ -689,8 +638,8 @@ async function startgss() {
   * @param {*} options
   * @returns
   */
- gss.sendMedia = async (jid, path, fileName = "", caption = "", quoted = "", options = {}) => {
-  let types = await gss.getFile(path, true);
+ Xstro.sendMedia = async (jid, path, fileName = "", caption = "", quoted = "", options = {}) => {
+  let types = await Xstro.getFile(path, true);
   let { mime, ext, res, data, filename } = types;
   if ((res && res.status !== 200) || file.length <= 65536) {
    try {
@@ -718,7 +667,7 @@ async function startgss() {
   else if (/video/.test(mime)) type = "video";
   else if (/audio/.test(mime)) type = "audio";
   else type = "document";
-  await gss.sendMessage(jid, { [type]: { url: pathFile }, caption, mimetype, fileName, ...options }, { quoted, ...options });
+  await Xstro.sendMessage(jid, { [type]: { url: pathFile }, caption, mimetype, fileName, ...options }, { quoted, ...options });
   return fs.promises.unlink(pathFile);
  };
 
@@ -730,7 +679,7 @@ async function startgss() {
   * @param {*} options
   * @returns
   */
- gss.copyNForward = async (jid, message, forceForward = false, options = {}) => {
+ Xstro.copyNForward = async (jid, message, forceForward = false, options = {}) => {
   let vtype;
   if (options.readViewOnce) {
    message.message = message.message && message.message.ephemeralMessage && message.message.ephemeralMessage.message ? message.message.ephemeralMessage.message : message.message || undefined;
@@ -769,11 +718,11 @@ async function startgss() {
       }
     : {}
   );
-  await gss.relayMessage(jid, waMessage.message, { messageId: waMessage.key.id });
+  await Xstro.relayMessage(jid, waMessage.message, { messageId: waMessage.key.id });
   return waMessage;
  };
 
- gss.cMod = (jid, copy, text = "", sender = gss.user.id, options = {}) => {
+ Xstro.cMod = (jid, copy, text = "", sender = Xstro.user.id, options = {}) => {
   //let copy = message.toJSON()
   let mtype = Object.keys(copy.message)[0];
   let isEphemeral = mtype === "ephemeralMessage";
@@ -795,7 +744,7 @@ async function startgss() {
   if (copy.key.remoteJid.includes("@s.whatsapp.net")) sender = sender || copy.key.remoteJid;
   else if (copy.key.remoteJid.includes("@broadcast")) sender = sender || copy.key.remoteJid;
   copy.key.remoteJid = jid;
-  copy.key.fromMe = sender === gss.user.id;
+  copy.key.fromMe = sender === Xstro.user.id;
 
   return proto.WebMessageInfo.fromObject(copy);
  };
@@ -805,7 +754,7 @@ async function startgss() {
   * @param {*} path
   * @returns
   */
- gss.getFile = async (PATH, save) => {
+ Xstro.getFile = async (PATH, save) => {
   let res;
   let data = Buffer.isBuffer(PATH)
    ? PATH
@@ -818,7 +767,6 @@ async function startgss() {
    : typeof PATH === "string"
    ? PATH
    : Buffer.alloc(0);
-  //if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer')
   let type = (await FileType.fromBuffer(data)) || {
    mime: "application/octet-stream",
    ext: ".bin",
@@ -834,14 +782,14 @@ async function startgss() {
   };
  };
 
- return gss;
+ return Xstro;
 }
 
-startgss();
+StartBot();
 app.get("/", (req, res) => {
  res.send("Hello World!");
 });
 
 app.listen(PORT, () => {
- console.log(`Server is running on port ${PORT}`);
+ console.log(`Connected To${PORT}`);
 });

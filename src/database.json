@@ -1,26 +1,36 @@
 {
   "users": {
-    "2348052944641@s.whatsapp.net": {
-      "afkTime": -1,
-      "afkReason": "",
-      "limit": "Infinity"
-    },
-    "22871535411@s.whatsapp.net": {
-      "afkTime": -1,
-      "afkReason": "",
-      "limit": 10
-    },
     "2349027862116@s.whatsapp.net": {
       "afkTime": -1,
       "afkReason": "",
       "limit": "Infinity"
     },
-    "2347026352141@s.whatsapp.net": {
+    "254748387615@s.whatsapp.net": {
       "afkTime": -1,
       "afkReason": "",
       "limit": 10
     },
-    "2347039919598@s.whatsapp.net": {
+    "2349057843759@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": "",
+      "limit": 10
+    },
+    "17545025310859@lid": {
+      "afkTime": -1,
+      "afkReason": "",
+      "limit": 10
+    },
+    "2348102487241@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": "",
+      "limit": 10
+    },
+    "2349131808050@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": "",
+      "limit": 10
+    },
+    "2347026352141@s.whatsapp.net": {
       "afkTime": -1,
       "afkReason": "",
       "limit": 10
@@ -37,29 +47,7 @@
     }
   },
   "chats": {
-    "2348052944641@s.whatsapp.net": {
-      "antiviewonce": true,
-      "antibot": true,
-      "mute": false,
-      "antilink": false,
-      "antidelete": true,
-      "archived": true
-    },
-    "120363303905757320@g.us": {
-      "antiviewonce": true,
-      "antibot": true,
-      "mute": false,
-      "antilink": false,
-      "antidelete": true
-    },
-    "120363293027001927@g.us": {
-      "antiviewonce": true,
-      "antibot": true,
-      "mute": false,
-      "antilink": false,
-      "antidelete": true
-    },
-    "2349027862116:67@s.whatsapp.net": {
+    "2349027862116:70@s.whatsapp.net": {
       "antiviewonce": true,
       "antibot": true,
       "mute": false,
@@ -73,14 +61,28 @@
       "antilink": false,
       "antidelete": true
     },
-    "120363192958314850@g.us": {
+    "120363299036946556@g.us": {
       "antiviewonce": true,
       "antibot": true,
       "mute": false,
       "antilink": false,
       "antidelete": true
     },
-    "120363299036946556@g.us": {
+    "120363293027001927@g.us": {
+      "antiviewonce": true,
+      "antibot": true,
+      "mute": false,
+      "antilink": false,
+      "antidelete": true
+    },
+    "120363280521756115@g.us": {
+      "antiviewonce": true,
+      "antibot": true,
+      "mute": false,
+      "antilink": false,
+      "antidelete": true
+    },
+    "2348102487241@s.whatsapp.net": {
       "antiviewonce": true,
       "antibot": true,
       "mute": false,
@@ -93,11 +95,6 @@
     "akinator": []
   },
   "settings": {
-    "2348052944641@s.whatsapp.net": {
-      "anticall": false,
-      "status": 0,
-      "autobio": false
-    },
     "2349027862116@s.whatsapp.net": {
       "anticall": false,
       "status": 0,
