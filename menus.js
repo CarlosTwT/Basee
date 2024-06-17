@@ -39,7 +39,7 @@ const cmdGrup = [
  "Poll",
  "Getbio",
 ];
-const cmdDown = ["Apk", "Facebook", "Mediafire", "Pinterestdl", "Gitclone", "Gdrive", "Insta", "Ytmp3", "Ytmp4", "Play", "Song", "Video", "Ytmp3doc", "Ytmp4doc", "Tiktok"];
+const cmdDown = ["Apk", "Facebook", "Mediafire", "Pinterestdl", "Gitclone", "Gdrive", "Insta", "Ytmp3", "Ytmp4", "Play", "Song", "Video", "Ytmp3doc", "Ytmp4doc", "Tiktok", "Spotify"];
 const cmdSearch = ["Play", "Yts", "Imdb", "Google", "Gimage", "Pinterest", "Wallpaper", "Wikimedia", "Ytsearch", "Ringtone", "Lyrics"];
 const cmdFun = ["Delttt", "Tictactoe"];
 const cmdConv = [

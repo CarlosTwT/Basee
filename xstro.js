@@ -1876,7 +1876,41 @@ Waiting @${room.game.currentTurn.split("@")[0]} Type *surrender* to give up and 
      xstro.sendText(m.chat, `https://chat.whatsapp.com/${response}\n\nGroup Link: ${groupMetadata.subject}`, m, { detectLink: true });
     }
     break;
-
+    case 'spotify':
+      {
+        if (isBan) return m.reply(mess.banned);
+        if (isBanChat) return m.reply(mess.bangc);
+        if (!text) return m.reply('Please provide a Spotify track URL');
+    
+        const spotifyUrl = `https://api.maher-zubair.tech/download/spotify?url=${encodeURIComponent(text)}`;
+    
+        fetch(spotifyUrl)
+          .then(response => response.json())
+          .then(data => {
+            if (data.status !== 200) {
+              return m.reply('An error occurred while fetching the Spotify track');
+            }
+    
+            const { song, artist, album_name, release_date, cover_url, url } = data.result;
+            const artistNames = artist.join(', ');
+            const caption = `
+    Song: ${song}
+    Artist: ${artistNames}
+    Album: ${album_name}
+    Release Date: ${release_date}
+            `;
+    
+            xstro.sendMessage(m.chat, { image: { url: cover_url }, caption }, { quoted: m });
+    
+            // Send the MP3 audio
+            xstro.sendMessage(m.chat, { audio: { url: url }, mimetype: 'audio/mp3' }, { quoted: m });
+          })
+          .catch(error => {
+            console.error('Error fetching Spotify track:', error);
+            m.reply('An error occurred while fetching the Spotify track');
+          });
+      }
+      break;
    case "setstatus":
    case "setbiobot":
    case "setbotbio":
