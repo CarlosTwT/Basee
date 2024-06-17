@@ -920,15 +920,15 @@ ${formattedCmdList
   }
 
   const introTextConvert = generateMenu(cmdConv, "𝗖𝗢𝗡𝗩𝗘𝗥𝗧𝗘𝗥");
-  const introTextAdmin = generateMenu(cmdGrup, "𝗔𝗗𝗠𝗜𝗡 𝗠𝗘𝗡𝗨");
+  const introTextAdmin = generateMenu(cmdGrup, "ᴀᴅᴍɪɴ ᴍᴇɴᴜ");
   const introTextOwner = generateMenu(cmdOwner, "𝗢𝗪𝗡𝗘𝗥");
-  const introTextMain = generateMenu(cmdMain, "𝗠𝗔𝗜𝗡 𝗠𝗘𝗡𝗨");
+  const introTextMain = generateMenu(cmdMain, "𝗠𝗔𝗜𝗡 ᴍᴇɴᴜ");
   const introTextDownload = generateMenu(cmdDown, "𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗘𝗥");
   const introTextStalk = generateMenu(cmdStalk, "𝗦𝗧𝗔𝗟𝗞");
   const introTextSearch = generateMenu(cmdSearch, "𝗦𝗘𝗔𝗥𝗖𝗛");
-  const introTextFun = generateMenu(cmdFun, "𝗙𝗨𝗡 𝗠𝗘𝗡𝗨");
-  const introTextTool = generateMenu(cmdTool, "𝗧𝗢𝗢𝗟 𝗠𝗘𝗡𝗨");
-  const introTextAi = generateMenu(cmdAi, "𝗔𝗜 𝗠𝗘𝗡𝗨");
+  const introTextFun = generateMenu(cmdFun, "𝗙𝗨𝗡 ᴍᴇɴᴜ");
+  const introTextTool = generateMenu(cmdTool, "𝗧𝗢𝗢𝗟 ᴍᴇɴᴜ");
+  const introTextAi = generateMenu(cmdAi, "𝗔𝗜 ᴍᴇɴᴜ");
 
   const menuText = `*🔢 TYPE BELOW NUMBER*
 1. ᴄᴏɴᴠᴇʀᴛᴍᴇɴᴜ
@@ -5821,10 +5821,8 @@ ${menuText
      }
      break;
  
-    case "menu":
+    case "menuall":
     case "help":
-    case "list":
-    case "listmenu":
      {
       if (isBan) return m.reply(mess.banned);
       if (isBanChat) return m.reply(mess.bangc);
@@ -5833,7 +5831,7 @@ ${menuText
      break;
  
      function getRandomSymbol() {
-      const symbols = ["◉", "★", "◎", "✯", "✯", "✰", "◬", "✵", "✦"]; // Add more symbols as needed
+      const symbols = ["✵"]; // Add more symbols as needed
       const randomIndex = Math.floor(Math.random() * symbols.length);
       return symbols[randomIndex];
      }
@@ -5845,31 +5843,28 @@ ${menuText
  
      const randomSymbol = getRandomSymbol();
  
-    case "menuall":
+    case "menu":
     case "allmenu": {
      if (isBan) return m.reply(mess.banned);
      if (isBanChat) return m.reply(mess.bangc);
      await doReact("📁");
      let a = db.data.users[m.sender];
      let introText = `
- ╭──═❮ *GssBotwa* ❯═─┈•
- │ Hi *${pushname}* 👋  
- ╰–❖ *${greetingTime}* 😄 
- 
- ╭──═❮ *Bot Info* ❯═─┈•
- │ *Bot Name* : *${botname}*
- │ *Owner Name* : *${ownername}*
- │ *Prefix* :  *[ . ]*
- │ *Uptime* : *${hours}h ${minutes}m ${seconds}s*
- │ *Mode* : *Public*
- │ *TotalUser* : *${Object.keys(global.db.data.users).length} Users* 
- │ *TotalChat* : *${Object.keys(global.db.data.chats).length} Group/Chat*
- ╰────────────────❃ 
- ╭──═❮ *Users Info* ❯═─┈•
- │ *Name* : *${pushname}*
- │ *Number* : *${m.sender.split("@")[0]}*
- │ *Premium* : *${isPremium ? "✅" : "❌"}* ${readmore}
- ╰────────────────❃ `;
+ ╭━━━〔 *GssBotwa* 〕━━━┈⊷
+ ┃✵│ Hi *${pushname}* 👋  
+ ┃✵│ *${greetingTime}* 😄 
+ ┃✵│ *Bot Name* : *${botname}*
+ ┃✵│ *Owner Name* : *${ownername}*
+ ┃✵│ *Prefix* :  *[ . ]*
+ ┃✵│ *Uptime* : *${hours}h ${minutes}m ${seconds}s*
+ ┃✵│ *Mode* : *Public*
+ ┃✵│ *TotalUser* : *${Object.keys(global.db.data.users).length} Users* 
+ ┃✵│ *TotalChat* : *${Object.keys(global.db.data.chats).length} Group/Chat*
+ ┃✵│ *Name* : *${pushname}*
+ ┃✵│ *Number* : *${m.sender.split("@")[0]}*
+ ┃✵│ *Premium* : *${isPremium ? "✅" : "❌"}* ${readmore}
+ ┃✵╰──────────────
+ ╰━━━━━━━━━━━━━━━┈⊷ `;
  
      const randomFontStyle = getRandomFontStyle();
      const randomSymbol = getRandomSymbol();
@@ -5880,13 +5875,11 @@ ${menuText
       .join("\n");
  
      introText += `
- ╭───〈 𝗔𝗗𝗠𝗜𝗡 𝗠𝗘𝗡𝗨 〉───◆
- ┃     ╭─────────────···▸
- ${cmdList
-  .split("\n")
-  .map(item => `┃${item ? " " + item.trim() : ""}`)
-  .join("\n")}
- ┃     ╰──────────────
+ ╭─────────────┈⊷
+ │「 ᴀᴅᴍɪɴ ᴍᴇɴᴜ 」
+ ╰┬────────────┈⊷
+ ││◦➛ ${cmdList.split("\n").map(item => `┃${item ? " " + item.trim() : ""}`).join("\n")}
+ ┃╰──────────────
  ╰━━━━━━━━━━━━━━━┈⊷`;
  
      cmdList = cmdTool
@@ -5910,7 +5903,7 @@ ${menuText
       .join("\n");
  
      introText += `
- ╭───〈 𝗔𝗜 𝗠𝗘𝗡𝗨 〉───◆
+ ╭───〈 𝗔𝗜 ᴍᴇɴᴜ 〉───◆
  ┃     ╭─────────────···▸
  ${cmdList
   .split("\n")
@@ -5970,7 +5963,7 @@ ${menuText
       .join("\n");
  
      introText += `
- ╭───〈 𝗙𝗨𝗡 𝗠𝗘𝗡𝗨 〉───◆
+ ╭───〈 𝗙𝗨𝗡 ᴍᴇɴᴜ 〉───◆
  ┃     ╭─────────────···▸
  ${cmdList
   .split("\n")
@@ -6131,7 +6124,7 @@ ${menuText
        .join("\n");
  
       const introText = `
- ╭───〈 *𝗔𝗗𝗠𝗜𝗡 𝗠𝗘𝗡𝗨* 〉───◆
+ ╭───〈 *ᴀᴅᴍɪɴ ᴍᴇɴᴜ* 〉───◆
  ┃     ╭─────────────···▸
  ${cmdList
   .split("\n")
@@ -6144,7 +6137,7 @@ ${menuText
       await gss.sendMessage(
        m.chat,
        {
-        image: fs.readFileSync("./menuimage/menu.jpg"),
+        image: fs.readFileSync("./menuimage/1.jpeg"),
         caption: introText,
         contextInfo: {
          externalAdReply: {
@@ -6262,7 +6255,7 @@ ${menuText
        .join("\n");
  
       const introText = `
- ╭───〈 𝗙𝗨𝗡 𝗠𝗘𝗡𝗨 〉───◆
+ ╭───〈 𝗙𝗨𝗡 ᴍᴇɴᴜ 〉───◆
  ┃     ╭─────────────···▸
  ${cmdList
   .split("\n")
@@ -6318,7 +6311,7 @@ ${menuText
       await gss.sendMessage(
        m.chat,
        {
-        image: fs.readFileSync("./menuimage/menu.jpg"),
+        image: fs.readFileSync("./menuimage/1.jpeg"),
         caption: introText,
         contextInfo: {
          externalAdReply: {
@@ -6404,7 +6397,7 @@ ${menuText
       await gss.sendMessage(
        m.chat,
        {
-        image: fs.readFileSync("./menuimage/menu.jpg"),
+        image: fs.readFileSync("./menuimage/1.jpeg"),
         caption: introText,
         contextInfo: {
          externalAdReply: {
@@ -6434,7 +6427,7 @@ ${menuText
        .join("\n");
  
       const introText = `
- ╭───〈 𝗔𝗜 𝗠𝗘𝗡𝗨 〉───◆
+ ╭───〈 𝗔𝗜 ᴍᴇɴᴜ 〉───◆
  ┃     ╭─────────────···▸
  ${cmdList
   .split("\n")
