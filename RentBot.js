@@ -74,7 +74,7 @@ if (kay.key && kay.key.remoteJid === 'status@broadcast') return
 if (!gss.public && !kay.key.fromMe && chatUpdate.type === 'notify') return
 if (kay.key.id.startsWith('BAE5') && kay.key.id.length === 16) return
 m = smsg(gss, kay, store)
-require('./gss')(gss, m, chatUpdate, store)
+require('./cmds')(gss, m, chatUpdate, store)
 } catch (err) {
 console.log(err)}
 })
